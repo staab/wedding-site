@@ -1,8 +1,8 @@
-
 <html>
 <head>
     <title>Jon and Valari</title>
-    <script type="text/javascript" src="jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="/jssor.slider.mini.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             $('#intro a').on('click', function(){
@@ -61,6 +61,19 @@
             $("#leave_message").click(function(){
                 $("#guest_message").val("").toggle()
             });
+            $("#more").click(function () {
+                $("#content").animate({
+                    "margin-top": - (50 + $("#wrapper").position().top + $("#wrapper").height())
+                }, function () {
+                    $('#slideshow').show().animate({
+                        opacity: 1
+                    }, function () {
+                        var slider = new $JssorSlider$('slider1_container', {
+                            $AutoPlay: true
+                        });
+                    });
+                });
+            });
         });
     </script>
     <style type="text/css">
@@ -100,7 +113,7 @@
         body {
             line-height: 1;
             background: white; /*#0089B2;*/
-            zoom: 1.7;
+            zoom: 1.6;
         }
         ol, ul {
             list-style: none;
@@ -323,6 +336,23 @@
         iframe {
             zoom: 1;
         }
+
+        #more {
+            text-align: center;
+            margin: 20px;
+        }
+
+        #slideshow {
+            background: black;
+            display: none;
+            opacity: 0;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            cursor: move;
+        }
     </style>
 </head>
 <body>
@@ -396,6 +426,22 @@
                         </li>
                         <li class="list-shadow"></li>
                     </ol>
+                    <div id="more">
+                        <a href="#">
+                            More
+                            <br>
+                            &dtrif;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="slideshow" u="slides">
+            <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 600px; height: 300px;">
+                <!-- Slides Container -->
+                <div u="slides" style="cursor: move; position: absolute; overflow: hidden; left: 0px; top: 0px; width: 600px; height: 300px;">
+                    <div><img u="image" src="/Screenshot from 2015-02-09 08:56:01.png" /></div>
+                    <div><img u="image" src="/Screenshot from 2015-02-19 23:48:13.png" /></div>
                 </div>
             </div>
         </div>

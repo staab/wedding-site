@@ -10,11 +10,16 @@ app.get('/', function (req, res) {
     });
 });
 
-app.get('/jquery-2.1.0.min.js', function (req, res) {
-    fs.readFile('./static/jquery-2.1.0.min.js', 'utf-8', function (err, contents) {
-        res.send(contents);
-    });
-});
+app.use(express.static('static', {
+    dotfiles: 'ignore',
+    etag: false,
+    index: false,
+    maxAge: '1d',
+    redirect: false,
+    setHeaders: function (res, path, stat) {
+        res.set('x-timestamp', Date.now());
+    }
+}));
 
 app.get('/register/', function (req, res) {
     function writeRsvp() {
@@ -30,6 +35,8 @@ app.get('/register/', function (req, res) {
     fs.exists('./rsvp/', function (exists) {
         if (!exists) {
             fs.mkdir('./rsvp/', writeRsvp);
+        } else {
+            writeRsvp();
         }
     });
 });
