@@ -10,7 +10,13 @@ app.get('/', function (req, res) {
     });
 });
 
-app.use(express.static('static', {
+app.get('/slideshow/', function (req, res) {
+    fs.readFile('./slideshow.html', 'utf-8', function (err, contents) {
+        res.send(contents);
+    });
+});
+
+var staticOptions = {
     dotfiles: 'ignore',
     etag: false,
     index: false,
@@ -19,7 +25,10 @@ app.use(express.static('static', {
     setHeaders: function (res, path, stat) {
         res.set('x-timestamp', Date.now());
     }
-}));
+};
+
+app.use(express.static('static', staticOptions));
+app.use(express.static('bower_components', staticOptions));
 
 app.get('/register/', function (req, res) {
     function writeRsvp() {

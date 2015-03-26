@@ -1,0 +1,244 @@
+#content {
+    padding: 20px;
+    margin: 0 -8px 0 0;
+    position: relative;
+    top: -2px;
+    left: -4px;
+    background: #ddd; /*#FFC284;*/
+    box-shadow: 0 0 1px 1px black; /*#0089B2;*/
+    border-radius: 25px;
+}
+
+#shadow {
+    margin: 100px auto;
+    width: 300px;
+    position: relative;
+    background: #aaa; /*#0089B2;*/
+    box-shadow: 0 0 2px 2px #aaa; /*#0089B2;*/
+    border-radius: 20px;
+}
+
+h2 {
+    margin: 0 auto 15px;
+    text-align: center;
+}
+
+h3 {
+    margin: 10px 0;
+}
+
+h4 {
+    margin: 10px 0;
+}
+
+p {
+    margin: 10px;
+    font-size: 12px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    text-shadow: 1px 1px #ccc; /*#FF8000;*/
+}
+
+a:hover {
+    text-shadow: 1px 1px white;
+    cursor: pointer;
+}
+
+ul li {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+ol > li {
+    border: 1px solid black; /*#B25A00;*/
+    border-radius: 8px;
+    background: white; /*#3CD1FF;*/
+    margin: 20px 0 0;
+    padding: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+ol > li.list-shadow {
+    width: 240px;
+    margin-left: 4px;
+    z-index: 1;
+    border: 0px;
+    background: black;
+    box-shadow: 0 0 2px 2px black;
+    margin-top: -19px;
+}
+
+#error {
+    border: 1px solid #FF372B;
+    background: white; /*#FF372B;*/
+    color: black;
+    border-radius: 8px;
+    padding: 10px;
+    display: none;
+    text-align: center;
+}
+
+a.button {
+    border-radius: 8px;
+    margin: 10px auto;
+    display: block;
+    background: #aaa; /*#0089B2;*/
+    box-shadow: 0 0 1px 1px #aaa; /*#0089B2;*/
+    cursor: pointer;
+}
+a.button .body {
+    text-align: center;
+    padding: 10px;
+    margin: 0 -6px 0 0;
+    position: relative;
+    top: -2px;
+    left: -3px;
+    background: white; /*#3CD1FF;*/
+    border-radius: 8px;
+}
+a.button:hover {
+    /*background: #0089B2;*/
+}
+a.button:active {
+    box-shadow: none;
+    top: 0;
+}
+a.button .body:hover {
+    background: #eee; /*#45DAFF;*/
+}
+a.button .body:active {
+    top: 0;
+}
+
+.inactive {
+    opacity: .5;
+    cursor: progress;
+}
+
+iframe {
+    border: 0px;
+    overflow: hidden;
+}
+
+#intro {
+
+}
+
+#form {
+    display: none;
+}
+
+#form input, #form label {
+    display: inline-block;
+    width: 125px;
+    border-radius: 3px;
+}
+#form label {
+    position: relative;
+    padding: 5px 4px;
+    margin: 5px 8px 5px 0px;
+    background: white; /*#3CD1FF;*/
+}
+#form label:hover {
+    background: #eee; /*#FF9010;*/
+}
+#form .label-shadow {
+    width: 129px;
+    display: inline-block;
+    background: #aaa; /*#0089B2;*/
+    height: 25px;
+    position: relative;
+    margin: 0 20px -25px 2px;
+    top: 8px;
+    border-radius: 3px;
+    box-shadow: 0 0 1px 1px #aaa; /*#0089B2;*/
+}
+#form .full-width {
+    width:  261px;
+}
+#form .label-shadow.full-width {
+    width:  265px;
+}
+#form textarea.full-width {
+    width:  270px;
+}
+#leave_message {
+    cursor: pointer;
+}
+#leave_message:active {
+    top: 3px;
+}
+#guest_message {
+    display: none;
+}
+#form input, #form select {
+    margin-right: -20px;
+    height: 27px;
+    position: relative;
+    padding: 4px;
+    font-size: 16px;
+    border: 0px;
+}
+#form input:focus, #form select:focus {
+    box-shadow: 0 0 3px 3px #ccc inset;
+}
+#form input[type='checkbox']:focus {
+    box-shadow: none;
+}
+
+#form input[type='checkbox'] {
+    margin: -3px -20px 0 0;
+    width: 27px;
+    top: 8px;
+    height: 27px;
+}
+
+#epilogue {
+    display: none;
+}
+
+iframe {
+    zoom: 1;
+}
+
+#more {
+    text-align: center;
+    margin: 20px;
+}
+
+.vertical-center {
+    /* Fallback for vh unit */
+    min-height: 100%;
+
+    /* Make it a flex container */;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    /* Align the bootstrap's container vertically */;
+    -webkit-box-align : center;
+    -webkit-align-items : center;
+    -moz-box-align : center;
+    -ms-flex-align : center;
+    align-items : center;
+
+    /* In legacy web browsers such as Firefox 9;
+     we need to specify the width of the flex container */;
+    width: 100%;
+
+    /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers;
+     hence the bootstrap's container won't be aligned to the center anymore.;
+
+     Therefore, we should use the following declarations to get it centered again */;
+    -webkit-box-pack : center;
+    -moz-box-pack : center;
+    -ms-flex-pack : center;
+    -webkit-justify-content : center;
+    justify-content : center;
+}
