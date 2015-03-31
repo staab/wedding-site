@@ -150,12 +150,12 @@
                 });
             }
 
-            positionAll();
             $(window).resize(positionAll);
 
             // Initial
             setTimeout(function () {
                 $slideshow.find('img:eq(0)').animate({opacity: 1}, 1500)
+                positionAll();
                 setTimeout(slide, 5000);
             }, 1000);
         });
