@@ -20,11 +20,12 @@
                 $('#map').html('<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d175518.93794382026!2d-117.18853379957393!3d46.57768026587551!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54a02cdf14c5c589%3A0x96f103b312296840!2s501+Wawawai+Rd%2C+Colton%2C+WA+99113!5e0!3m2!1sen!2sus!4v1427808623778" width="245" height="200" frameborder="0" style="border:0;"></iframe>');
             };
             $("#skip").on("click", showDetails);
-            $('#submit').on('click', function(){
+            $('#submit').on('click', function () {
                 var $this = $(this),
                     name = $('#guest_name').val(),
                     email = $('#guest_email').val(),
-                    number = $('#guest_number').val();
+                    number = $('#guest_number').val(),
+                    vegetarians = $('#vegetarian_number').val();
 
                 $('#error').hide();
                 if(!name){
@@ -35,6 +36,10 @@
                     $('#error').show().text("Please enter a valid email!");
                     return false;
                 }
+                if(parseInt(number) < parseInt(vegetarians)) {
+                    $('#error').show().text("There should only be as many vegetarians as there are guests.");
+                    return false;
+                }
 
                 $.ajax({
                     url: '/register/',
@@ -42,6 +47,7 @@
                         name: name,
                         email: email,
                         number: number,
+                        vegetarians: vegetarians,
                         coming: $("#guest_coming").prop('checked'),
                         message: $("#guest_message").val()
                     },
@@ -202,7 +208,7 @@
                     <h2>RSVP?</h2>
                     <p>Join us June 6, 2015 in Moscow, ID!</p>
                     <div id="error">
-                        Nothin'
+                        <!-- Filled with js -->
                     </div>
                     <div class="label-shadow"></div>
                     <label for="guest_name">Name: </label>
@@ -219,6 +225,21 @@
                     <div class="label-shadow guest-number"></div>
                     <label for="guest_number" class='guest-number'>Guests: </label>
                     <select id="guest_number" class="guest-number">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+
+                    <div class="label-shadow vegetarian-number"></div>
+                    <label for="vegetarian_number" class='vegetarian-number'>Vegetarians: </label>
+                    <select id="vegetarian_number" class="vegetarian-number">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -249,9 +270,13 @@
                         <li>
                             <h4>Ceremony location:</h4>
                             <small>
-                                <a href="http://www.red-barn-farms.com/index.html" target="_blank">
+                                <a class="basic-link" href="http://www.red-barn-farms.com/index.html" target="_blank">
                                     Red Barn Farms
                                 </a>
+                                <br />
+                                501 Wawawai Rd,
+                                <br />
+                                Colton, WA 99113
                             </small>
                             <div id="map" style="zoom: 1"></div>
                         </li>
@@ -259,12 +284,27 @@
                         <li>
                             <h4>Registry providers:</h4>
                             <ul>
+                                <li>
+                                    <a class="basic-link" href="http://www.amazon.com/gp/registry/wedding/9XKOSAD8OI30" target="_blank">
+                                        Amazon
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="basic-link" href="http://www.bedbathandbeyond.com/store/giftregistry/view_registry_guest.jsp?pwsToken=&eventType=Wedding&registryId=542105367&pwsurl=" target="_blank">
+                                        Bed Bath and Beyond
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="basic-link" href="http://www1.macys.com/registry/wedding/guest/?registryId=6351831" target="_blank">
+                                        Macys
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="list-shadow"></li>
                     </ol>
                     <div id="more">
-                        <a href="/slideshow/">
+                        <a class="basic-link" href="/slideshow/">
                             More &rtrif;
                         </a>
                     </div>
