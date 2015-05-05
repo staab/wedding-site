@@ -4,13 +4,21 @@
     <script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            $('#intro a').on('click', function(){
-                $('#intro').hide();
-                $('#form').show();
-            });
-            var showDetails = function(){
-                $('#form').hide();
-                $('#epilogue').show();
+            $('#form').show();
+
+            $(window).on('hashchange', function () {
+                console.log(window.location.hash)
+                if (window.location.hash === '#accomodation') {
+                    showAccomodation();
+                } else if (window.location.hash === '#registry') {
+                    showRegistry();
+                }
+            }).trigger('hashchange');
+
+            function showAccomodation() {
+                $('#form').addClass('hidden');
+                $('#registry').addClass('hidden');
+                $('#accomodation').removeClass('hidden');
                 $('#submit').addClass('inactive')
                     .attr('disabled', true)
                     .find('span').text('Thanks!')
@@ -18,8 +26,14 @@
 
                 // Gotta add this only when the element is visible.
                 $('#map').html('<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d175518.93794382026!2d-117.18853379957393!3d46.57768026587551!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54a02cdf14c5c589%3A0x96f103b312296840!2s501+Wawawai+Rd%2C+Colton%2C+WA+99113!5e0!3m2!1sen!2sus!4v1427808623778" width="245" height="200" frameborder="0" style="border:0;"></iframe>');
-            };
-            $("#skip").on("click", showDetails);
+            }
+
+            function showRegistry() {
+                $('#form').addClass('hidden');
+                $('#accomodation').addClass('hidden');
+                $('#registry').removeClass('hidden');
+            }
+
             $('#submit').on('click', function () {
                 var $this = $(this),
                     name = $('#guest_name').val(),
@@ -51,16 +65,11 @@
                         coming: $("#guest_coming").prop('checked'),
                         message: $("#guest_message").val()
                     },
-                    success: showDetails,
+                    success: showAccomodation,
                     error: function(res){
                         $('#error').show().text("Something went wrong with your registration. Sorry about that!");
                     }
                 })
-            });
-            $('body').on('keydown', function(e){
-                if(e.keyCode === 13 && $('#form').css('display') == 'block'){
-                    $('#submit').trigger('click');
-                }
             });
             $('#guest_coming').click(function(){
                 $('.guest-number').toggle()
@@ -80,17 +89,22 @@
     }
 
     p {
+        text-indent: 0px;
+        font-size: 10px;
+    }
+
+    .text-center {
         margin: 10px;
         font-size: 12px;
         text-align: center;
     }
 
-    #intro {
-
+    .hidden {
+        display: none;
     }
 
-    #form {
-        display: none;
+    #intro {
+
     }
 
     #form input, #form label {
@@ -158,17 +172,8 @@
         height: 27px;
     }
 
-    #epilogue {
-        display: none;
-    }
-
     iframe {
         zoom: 1;
-    }
-
-    #more {
-        text-align: center;
-        margin: 20px;
     }
 
     #content {
@@ -193,20 +198,12 @@
     </style>
 </head>
 <body>
-    <div id="wrapper">
+    <div id="wrapper" class="basic-link">
         <div id="shadow">
             <div id="content">
-                <div id="intro">
-                    <h2>Welcome!</h2>
-                    <a class="button">
-                        <div class="body">
-                            Rsvp...
-                        </div>
-                    </a>
-                </div>
                 <form id="form" action="#">
-                    <h2>RSVP?</h2>
-                    <p>Join us June 6, 2015 in Moscow, ID!</p>
+                    <h2>RSVP with us!</h2>
+                    <p class="text-center">Join us June 6, 2015 in Moscow, ID</p>
                     <div id="error">
                         <!-- Filled with js -->
                     </div>
@@ -256,46 +253,155 @@
                     <label for="guest_message" class="full-width" id="leave_message">Want to leave a message?</label>
                     <textarea rows="8" id="guest_message" class="full-width"></textarea>
 
-                    <a class="button" id="submit">
+                    <a class="button text-default" id="submit">
                         <div class="body">
-                            <span>Let us know!</span>
+                            <span>Send RSVP!</span>
                         </div>
                     </a>
-                    <a id="skip" style="font-size: 10px;">Already registered?</a>
                 </form>
-                <div id="epilogue">
-                    <h2>Thanks!</h2>
-                    <h3>Stuff you might want to know now...</h3>
+                <div id="accomodation" class="hidden">
+                    <h3>Airport and Accomodations</h3>
+                    <p>
+                        The Wedding will be in Colton, WA but guests will all be
+                        staying in the town of Moscow, ID where Jon and Valari
+                        live (just 21 miles from Colton, WA). See below for details
+                        on ceremony location, airports in the region, and local
+                        accomodations.
+                    </p>
                     <ol>
                         <li>
-                            <h4>Ceremony location:</h4>
-                            <small>
+                            <h2>Ceremony Location</h2>
+                            <h4>
                                 <a class="basic-link" href="http://www.red-barn-farms.com/index.html" target="_blank">
                                     Red Barn Farms
                                 </a>
-                                <br />
+                            </h4>
+                            <p>
                                 501 Wawawai Rd,
                                 <br />
-                                Colton, WA 99113
-                            </small>
+                                Colton, WA
+                                <br />
+                                99113, United States
+                            </p>
                             <div id="map" style="zoom: 1"></div>
                         </li>
                         <li class="list-shadow"></li>
                         <li>
+                            <h2>Airport Information</h2>
+                            <h4>
+                                <a href="http://spokaneairports.net/">
+                                    Spokane International Airport
+                                </a>
+                            </h4>
+                            <p>
+                                9000 West Airport Drive
+                                <br />
+                                Spokane, WA
+                                <br />
+                                99224, United States
+                            </p>
+                            <p>
+                                Spokane is about a 1.5 hour drive through the beautiful Palouse to Moscow, ID.
+                            </p>
+                            <h4>
+                                <a href="http://golws.com/">
+                                    Lewiston - Nez Perce County Regional Airport
+                                </a>
+                            </h4>
+                            <p>
+                                406 Burrell Avenue
+                                <br />
+                                Lewiston, ID
+                                <br />
+                                83501, United States
+                            </p>
+                            <p>
+                                Lewiston has fewer flights come into the airport,
+                                but is a good option if you are flying Alaska
+                                Air or Delta. It is about a 40 minute drive from Moscow, ID.
+                            </p>
+                            <h4>
+                                <a href="http://www.pullman-wa.gov/about-pullman/airport">
+                                    Pullman-Moscow Regional Airport
+                                </a>
+                            </h4>
+                            <p>
+                                3200 Airport Road
+                                <br />
+                                Pullman, WA
+                                <br />
+                                99163, United States
+                            </p>
+                            <p>
+                                This is a very small airpot located just outside of Moscow.
+                            </p>
+                        </li>
+                        <li class="list-shadow"></li>
+                        <li>
+                            <h2>Accommodations</h2>
+                            <h4>
+                                <a target="_blank" href="http://www.uinnmoscow.com/">
+                                    Best Western University Inn
+                                </a>
+                            </h4>
+                            <p>
+                                1516 West Pullman Road,
+                                <br />
+                                Moscow, ID
+                                <br />
+                                83843, United States
+                                <br />
+                                <a target="_blank" href="tel:+12088820550">(208) 882-0550</a>
+                            </p>
+                            <p>
+                                At this hotel, guests can call the hotel for the Burnett/Miller wedding rate. They will hold 15 rooms until 6 weeks prior to the wedding date. After that, guests can still get the group rate but they open up the rooms to the public, so first come first serve.
+                            </p>
+                            <h4>
+                                <a target="_blank" href="http://www.laquintamoscow.com/">
+                                    La Quinta Inn &amp; Suites Moscow Pullman
+                                </a>
+                            </h4>
+                            <p>
+                                185 Warbonnet Drive,
+                                <br />
+                                Moscow, ID
+                                <br />
+                                83843, United States
+                                <br />
+                                <a target="_blank" href="tel:+12088825365">
+                                    (208) 882-5365‎
+                                </a>
+                            </p>
+                            <p>
+                                Click
+                                <a target="_blank" href="http://www.red-barn-farms.com/Camping%20and%20Lodging%20Options.pdf">here</a>
+                                for Other Camping and Lodging Options
+                            </p>
+                        </li>
+                        <li class="list-shadow"></li>
+                    </ol>
+                    <br />
+                    <a href="/rsvp/#registry">
+                        View Gift Registry &rtrif;
+                    </a>
+                </div>
+                <div id="registry" class="hidden">
+                    <ol>
+                        <li>
                             <h4>Registry providers:</h4>
                             <ul>
                                 <li>
-                                    <a class="basic-link" href="http://www.amazon.com/gp/registry/wedding/9XKOSAD8OI30" target="_blank">
+                                    <a href="http://www.amazon.com/gp/registry/wedding/9XKOSAD8OI30" target="_blank">
                                         Amazon
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="basic-link" href="http://www.bedbathandbeyond.com/store/giftregistry/view_registry_guest.jsp?pwsToken=&eventType=Wedding&registryId=542105367&pwsurl=" target="_blank">
+                                    <a href="http://www.bedbathandbeyond.com/store/giftregistry/view_registry_guest.jsp?pwsToken=&eventType=Wedding&registryId=542105367&pwsurl=" target="_blank">
                                         Bed Bath and Beyond
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="basic-link" href="http://www1.macys.com/registry/wedding/guest/?registryId=6351831" target="_blank">
+                                    <a href="http://www1.macys.com/registry/wedding/guest/?registryId=6351831" target="_blank">
                                         Macys
                                     </a>
                                 </li>
@@ -303,11 +409,10 @@
                         </li>
                         <li class="list-shadow"></li>
                     </ol>
-                    <div id="more">
-                        <a class="basic-link" href="/slideshow/">
-                            More &rtrif;
-                        </a>
-                    </div>
+                    <br />
+                    <a href="/rsvp/#accomodation">
+                        View Accomodations &rtrif;
+                    </a>
                 </div>
             </div>
         </div>

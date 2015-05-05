@@ -4,13 +4,13 @@ var express = require('express'),
     app = express(),
     fs = require('fs');
 
-app.get('/', function (req, res) {
+app.get('/rsvp/', function (req, res) {
     fs.readFile('./index.html', 'utf-8', function (err, contents) {
         res.send(contents);
     });
 });
 
-app.get('/slideshow/', function (req, res) {
+app.get('/', function (req, res) {
     fs.readFile('./slideshow.html', 'utf-8', function (err, contents) {
         res.send(contents);
     });

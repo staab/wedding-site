@@ -30,7 +30,7 @@ a {
     text-shadow: 1px 1px #ccc; /*#FF8000;*/
 }
 
-a.basic-link {
+a.basic-link, .basic-link a:not(.text-default) {
     color: #8855aa;
 }
 
