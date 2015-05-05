@@ -70,54 +70,54 @@
             <img src="/img/DSC_8076-2.jpg">
             <img src="/img/DSC_8083.jpg">
             <img src="/img/DSC_8089.jpg">
-            <img src="/img/DSC_8094.jpg">
-            <img src="/img/DSC_8113.jpg">
-            <img src="/img/DSC_8128-2.jpg">
-            <img src="/img/DSC_8130-2.jpg">
-            <img src="/img/DSC_8137.jpg">
-            <img src="/img/DSC_8150-2.jpg">
-            <img src="/img/DSC_8181.jpg">
-            <img src="/img/DSC_8190-2.jpg">
-            <img src="/img/DSC_8202.jpg">
-            <img src="/img/DSC_8234.jpg">
-            <img src="/img/DSC_8242.jpg">
-            <img src="/img/DSC_8245.jpg">
-            <img src="/img/DSC_8250.jpg">
-            <img src="/img/DSC_8272.jpg">
-            <img src="/img/DSC_8275.jpg">
-            <img src="/img/DSC_8292.jpg">
-            <img src="/img/DSC_8379.jpg">
-            <img src="/img/DSC_8408.jpg">
-            <img src="/img/DSC_8416-2.jpg">
-            <img src="/img/DSC_8422-2.jpg">
-            <img src="/img/DSC_8504.jpg">
-            <img src="/img/DSC_8530.jpg">
-            <img src="/img/DSC_8553.jpg">
-            <img src="/img/DSC_8605.jpg">
-            <img src="/img/DSC_8635.jpg">
-            <img src="/img/DSC_8663-2.jpg">
-            <img src="/img/DSC_8797-2.jpg">
-            <img src="/img/DSC_8835.jpg">
-            <img src="/img/DSC_8853.jpg">
-            <img src="/img/DSC_8862-2.jpg">
-            <img src="/img/DSC_8874.jpg">
-            <img src="/img/DSC_8886.jpg">
-            <img src="/img/DSC_8927.jpg">
-            <img src="/img/DSC_8937.jpg">
-            <img src="/img/DSC_8947.jpg">
-            <img src="/img/DSC_8997-2.jpg">
-            <img src="/img/DSC_9026.jpg">
-            <img src="/img/DSC_9030.jpg">
-            <img src="/img/DSC_9084.jpg">
-            <img src="/img/DSC_9100.jpg">
-            <img src="/img/DSC_9106-4.jpg">
-            <img src="/img/DSC_9109.jpg">
-            <img src="/img/DSC_9137.jpg">
-            <img src="/img/DSC_9142.jpg">
-            <img src="/img/DSC_9146-2.jpg">
-            <img src="/img/DSC_9146.jpg">
-            <img src="/img/DSC_9238-2.jpg">
-            <img src="/img/DSC_9349.jpg">
+            <img data-src="/img/DSC_8094.jpg">
+            <img data-src="/img/DSC_8113.jpg">
+            <img data-src="/img/DSC_8128-2.jpg">
+            <img data-src="/img/DSC_8130-2.jpg">
+            <img data-src="/img/DSC_8137.jpg">
+            <img data-src="/img/DSC_8150-2.jpg">
+            <img data-src="/img/DSC_8181.jpg">
+            <img data-src="/img/DSC_8190-2.jpg">
+            <img data-src="/img/DSC_8202.jpg">
+            <img data-src="/img/DSC_8234.jpg">
+            <img data-src="/img/DSC_8242.jpg">
+            <img data-src="/img/DSC_8245.jpg">
+            <img data-src="/img/DSC_8250.jpg">
+            <img data-src="/img/DSC_8272.jpg">
+            <img data-src="/img/DSC_8275.jpg">
+            <img data-src="/img/DSC_8292.jpg">
+            <img data-src="/img/DSC_8379.jpg">
+            <img data-src="/img/DSC_8408.jpg">
+            <img data-src="/img/DSC_8416-2.jpg">
+            <img data-src="/img/DSC_8422-2.jpg">
+            <img data-src="/img/DSC_8504.jpg">
+            <img data-src="/img/DSC_8530.jpg">
+            <img data-src="/img/DSC_8553.jpg">
+            <img data-src="/img/DSC_8605.jpg">
+            <img data-src="/img/DSC_8635.jpg">
+            <img data-src="/img/DSC_8663-2.jpg">
+            <img data-src="/img/DSC_8797-2.jpg">
+            <img data-src="/img/DSC_8835.jpg">
+            <img data-src="/img/DSC_8853.jpg">
+            <img data-src="/img/DSC_8862-2.jpg">
+            <img data-src="/img/DSC_8874.jpg">
+            <img data-src="/img/DSC_8886.jpg">
+            <img data-src="/img/DSC_8927.jpg">
+            <img data-src="/img/DSC_8937.jpg">
+            <img data-src="/img/DSC_8947.jpg">
+            <img data-src="/img/DSC_8997-2.jpg">
+            <img data-src="/img/DSC_9026.jpg">
+            <img data-src="/img/DSC_9030.jpg">
+            <img data-src="/img/DSC_9084.jpg">
+            <img data-src="/img/DSC_9100.jpg">
+            <img data-src="/img/DSC_9106-4.jpg">
+            <img data-src="/img/DSC_9109.jpg">
+            <img data-src="/img/DSC_9137.jpg">
+            <img data-src="/img/DSC_9142.jpg">
+            <img data-src="/img/DSC_9146-2.jpg">
+            <img data-src="/img/DSC_9146.jpg">
+            <img data-src="/img/DSC_9238-2.jpg">
+            <img data-src="/img/DSC_9349.jpg">
         </div>
     </div>
     <div class="story vertical-center">
@@ -207,6 +207,17 @@
                 positionAll();
                 setTimeout(slide, 5000);
             }, 1000);
+
+            // Lazy load images
+            var lazyLoadSrc = setInterval(function () {
+                var $img = $('[data-src]').first();
+                $img.attr('src', $img.attr('data-src'));
+                $img.removeAttr('data-src');
+
+                if (!$('[data-src]')) {
+                    clearInterval(lazyLoadSrc);
+                }
+            }, 4000);
         });
     </script>
 </body>
